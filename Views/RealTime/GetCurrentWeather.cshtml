@@ -1,0 +1,31 @@
+﻿@model WeatherAppVSA.RealTime.RealTimeDto
+
+@{
+    ViewData["Title"] = "Current Weather";
+}
+
+<div class="container py-5">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-header text-center">
+                    <img src="@Model.Current.Condition.Icon" alt="Weather Icon" />
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-center">@Model.Current.Condition.Text</h5>
+                    <p class="card-text text-center">@Model.Location.Name, @Model.Location.Country</p>
+                    <p class="card-text text-center">@Model.Current.TemperatureCelsius°C</p>
+                    <div class="text-center">
+                        <span class="pe-4">Wind: @Model.Current.WindKPH KmPH</span>
+                        <span>Humidity: @Model.Current.Humidity %</span>
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                    <small>Last updated @Model.Current.LastUpdated</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

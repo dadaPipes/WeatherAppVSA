@@ -1,4 +1,7 @@
 using WeatherAppVSA;
+using WeatherAppVSA.RealTime;
+using WeatherAppVSA.RealTimeApi;
+using WeatherAppVSA.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,7 +9,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<WeatherApiOptions>(builder.Configuration.GetSection("WeatherApi"));
 
 // Add services to the container.
+
+builder.Services.AddHttpClient<WeatherApiClient>();
+
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IRealTimeService, RealTimeService>();
 
 var app = builder.Build();
 

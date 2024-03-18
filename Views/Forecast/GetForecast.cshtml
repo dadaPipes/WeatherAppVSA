@@ -1,0 +1,74 @@
+﻿@model WeatherAppVSA.Forecast.ForecastDto
+
+@{
+    ViewData["Title"] = "Forecast";
+}
+
+<header>
+  <h1 class="header">Forecast</h1>
+</header>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      <h2 class="location">@Model.Location.Name, @Model.Location.Region</h2>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      <p><span>@Model.Current.Condition.Text • @FormatDate(Model.Forecast.ForecastDay.FirstOrDefault().Date)</span></p>
+    </div>
+  </div>
+  <div class="row align-items-center justify-content-center">
+    <div class="col-auto">
+      <img src="@Model.Current.Condition.Icon" alt="Weather Icon">
+    </div>
+    <div class="col-auto">
+        <p class="current__temp">@Model.Current.TempC °C</p>
+    </div>
+  </div>
+  <div class="row justify-content-around">
+    <div class="col-auto">
+      <p>Wind: @Model.Current.WindKph KMPH</p>
+    </div>
+    <div class="col-auto">
+      <p>Humidity: @Model.Current.Humidity%</p>  
+    </div>
+  </div>
+
+<div class="row justify-content-center">
+  @if (Model?.Forecast?.ForecastDay != null)
+  {
+    foreach(var item in Model.Forecast.ForecastDay)
+    {
+      <div class="list__card col-auto d-flex flex-column align-items-center">
+        <div class="card__date">@FormatDate(item.Date)</div>
+        <img class="card__icon" src="@item.Day.Condition.Icon" alt="Weather Icon">
+        <div class="card__maxTemp">@item.Day.MaxTempC<small>°</small></div>
+        <div class="card__minTemp">@item.Day.MinTempC<small>°</small></div>
+      </div>
+    }
+  }
+  else
+  {
+    <p>No forecast data available.</p>
+  }
+</div>
+
+@functions {
+  public string FormatDate(string date)
+  {
+    if(date != null)
+    {
+      DateTime parsedDate;
+      if (DateTime.TryParse(date, out parsedDate))
+      {
+        return parsedDate.ToString("ddd dd");
+      }
+    }
+    if(date == null) 
+    {
+      return "No data";
+    }
+    return "Invalid date";
+  }
+}

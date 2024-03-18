@@ -1,0 +1,38 @@
+.container {
+  background-color: beige;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.header {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.location {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+
+.current__temp {
+  font-size: 1.8rem;
+}
+
+.list__card {
+  background-color: black;
+  margin: 1rem 0.2rem;
+  padding: 0.2rem 0;
+}
+
+.card__icon {
+  max-width: 50%;
+}
+
+.card__date,
+.card__maxTemp,
+.card__minTemp {
+  color: azure;
+}

@@ -1,4 +1,5 @@
 using WeatherAppVSA;
+using WeatherAppVSA.Forecast;
 using WeatherAppVSA.RealTime;
 using WeatherAppVSA.RealTimeApi;
 using WeatherAppVSA.Shared;
@@ -11,10 +12,10 @@ builder.Services.Configure<WeatherApiOptions>(builder.Configuration.GetSection("
 // Add services to the container.
 
 builder.Services.AddHttpClient<WeatherApiClient>();
-
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IRealTimeService, RealTimeService>();
+builder.Services.AddScoped<IForecastService, ForecastService>();
 
 var app = builder.Build();
 
@@ -28,11 +29,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
-
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
